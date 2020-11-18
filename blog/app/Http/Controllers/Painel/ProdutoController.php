@@ -55,8 +55,13 @@ class ProdutoController extends Controller
         $dataForm['active'] = ( !isset($dataForm['active'])) ? 0 : 1;
         
         // validando a insercao
-        $this->validate($request, $this->product->rules);
-
+        //$this->validate($request, $this->product->rules);
+        $validate = validator($dataForm, $this->product->rules);
+        if($validate->fails()) {
+            return redirect()->route('products.create')
+                            ->withErrors($validate)
+                            ->withInput();
+        }
         // cadastrando o produto advindo do form
 
         $insert = $this->product->create($dataForm);
