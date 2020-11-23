@@ -91,7 +91,12 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = $this->product->find($id);
+        
+        $title = 'Editar Produto ($id)';
+
+        $categories = ['eletronicos', 'moveis', 'limpeza', 'banho'];
+        return view('painel.products.create', compact('title', 'categories', 'product'));
     }
 
     /**
@@ -103,7 +108,7 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return "Editando o item {$id}";
     }
 
     /**
